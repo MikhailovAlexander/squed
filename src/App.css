@@ -1,38 +1,81 @@
-.App {
+* {font-family: Arial,Helvetica,sans-serif;}
+#header{
+  display: block;
+  background-color: #0f2d69;
+  font-size: 30pt;
+  font-weight: bold;
+  color: #e6e6e6;
   text-align: center;
+  padding: 10px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#header span.descr{
+  font-size: 20pt;
+  font-weight: normal;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#workspace{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.edit_panel{
   display: flex;
   flex-direction: column;
+  justify-content: start;
+  width: 100%;
+  height: 100%;
+  font-size: 15pt;
+  min-height: 500px;
+}
+.edit_panel label{
+  padding: 10px 0px 10px 0px;
+  background-color: #e6e6e6;
+}
+.query{
+  font-size: 1em;
+  text-align: left;
+  line-height: 1.5;
+}
+#controls{
+  background-color: #0f2d69;
+}
+#db_list_area{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.controls_block{
+  background-color: #e6e6e6;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button{
+  padding: 5px;
+  margin: 5px;
+  min-width: 50px;
+}
+#tags_list{
+  border-collapse: collapse;
+  background-color: #ffffff;
+  min-height: 30px;
+  margin: 5px;
+}
+#tags_list td{
+  padding: 5px;
+}
+.currentTag{
+  background-color: silver;
+}
+#footer{
+  background-color: #0f2d69;
+  font-size: 15pt;
+  color: #e6e6e6;
+  text-align: left;
+  padding: 5px;
+}
+#footer .descr{
+  font-size: 12px;
+  font-style: italic;
+  margin-left: 5px;
 }
