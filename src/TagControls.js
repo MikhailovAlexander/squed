@@ -19,11 +19,11 @@ class TagControls extends React.Component {
             "недопустимо вхождение строк '_add','_rem','_set'";
         this.msgConfirmDeleteTag = "Выбранный тег будет удален. Продолжить?";
         this.msgConfirmClearTags = "Все теги будут удалены. Продолжить?";
+        this.msgConfirmSearchTags = "При поиске тегов в запросе все текущие теги будут удалены. Продолжить?";
     }
 
     isTagsContains = (newTagName) => {
-        let isContains = this.props.tags.reduce((curVal, tag) => curVal || (tag.key === newTagName), false);
-        return isContains;
+        return this.props.tags.reduce((curVal, tag) => curVal || (tag.key === newTagName), false);
     }
     clickTag = (key) => {
         if(this.state.editMode) return;
@@ -50,6 +50,9 @@ class TagControls extends React.Component {
     clearButtonClick = () => {
         if(window.confirm(this.msgConfirmClearTags)) this.handlers.clearTags();
         this.setState({currentTag: undefined, tempValue: undefined});
+    }
+    searchButtonClick = () => {
+        if(window.confirm(this.msgConfirmSearchTags)) this.handlers.searchTags();
     }
     saveButtonClick = () => {
         let newTagKey = this.state.tempValue;
@@ -81,13 +84,15 @@ class TagControls extends React.Component {
                         id="clr_tag_btn"
                         disabled={this.state.addMode || this.state.editMode}
                         onClick={this.clearButtonClick}>Очистить</button>
+                    <button
+                        disabled={this.state.addMode || this.state.editMode}
+                        onClick={this.searchButtonClick}>Найти в запросе</button>
                 </div>
                 <table id="tags_list">
                     <thead>
                     <tr>
-                        <th></th>
-                        <th>имя тэга</th>
-                        <th colSpan="2" >подстановка значения</th>
+                        <th colSpan="2">имя тэга</th>
+                        <th colSpan="2">подстановка значения</th>
                     </tr>
                     </thead>
                     <tbody>

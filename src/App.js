@@ -55,6 +55,10 @@ class App extends React.Component {
     clearTags: () => {
       const newTags = [];
       this.setState({tags: newTags});
+    },
+    searchTags: () => {
+      const newTags = queryModifier.searchTags(this.state.query);
+      this.setState({tags: newTags});
     }
   }
   render() {

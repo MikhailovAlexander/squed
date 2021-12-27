@@ -21,6 +21,20 @@ class QueryModifier{
         return keyPattern.test(key) && !keyAntiPattern.test(key);
     }
 
+    getTagsSet(queryText){
+        let tagPattern  = new RegExp("((\\/\\*)|\\/)([a-z0-9_]+)_(add|rem|set)","gi");
+        let matches = queryText.matchAll(tagPattern);
+        let resultSet = new Set();
+        for(let match of matches) resultSet.add(match[3].toLowerCase());
+        return resultSet;
+    }
+
+    searchTags(queryText){
+        return Array.from(this.getTagsSet(queryText),(tag) => (
+            {key: tag, value: false, set_mode: false, set_value: undefined}
+        ));
+    }
+
     getPattern(tag, removeMode){
         let tagPattern  = "(\\/\\*)?(\\/)?" + tag + "(\\*\\/)?"
         if(removeMode){
