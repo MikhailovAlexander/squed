@@ -43,19 +43,22 @@ class QueryModifier{
         for(let tag of tagSet){
             let row = {
                 key: tag,
-                set: {cnt: 0, rows: 0},
-                add: {cnt: 0, rows: 0},
-                rem: {cnt: 0, rows: 0}
+                set_cnt: 0,
+                set_rows: 0,
+                add_cnt: 0,
+                add_rows: 0,
+                rem_cnt: 0,
+                rem_rows: 0
             }
             for(let mode of modes) {
                 tagPattern = this.getPattern(tag + "_" + mode, true);
                 matches = queryText.matchAll(tagPattern);
                 for (let match of matches) {
-                    row[mode]["rows"] += match[0].split('\n').length;
-                    row[mode]["cnt"]++;
+                    row[mode + "_rows"] += match[0].split('\n').length;
+                    row[mode + "_cnt"]++;
                 }
             }
-            result.push(row);
+            result.push(Array.from(Object.values(row)));
         }
         return result;
     }

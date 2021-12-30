@@ -1,5 +1,6 @@
 import React from 'react';
-import TagControls from './TagControls';
+import TagControls from './components/TagControls';
+import Result from './components/Result';
 import QueryModifier from './QueryModifier';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
@@ -16,6 +17,11 @@ class App extends React.Component {
     this.state = {
       query: queryModifier.querySample,
       tags: queryModifier.tagsSample,
+      result:{
+        label: "Результат выполнения запроса",
+        header: [],
+        values: []
+      },
       dbList: ["SqlServer", "PostgreSql"],
       currentDb: undefined
     };
@@ -61,7 +67,11 @@ class App extends React.Component {
       this.setState({tags: newTags});
     },
     analyseTags: () => {
-      console.log(queryModifier.analyseTags(this.state.query));
+      const label = "Анализ тегов в исходном запросе";
+      const header = ["Имя","Количество подстановок","в т.ч. строк","Количество добавлений","в т.ч. строк",
+        "Количество удалений","в т.ч. строк"];
+      const values = queryModifier.analyseTags(this.state.query);
+      this.setState({result: {label: label, header: header, values: values}});
     }
   }
   render() {
@@ -105,10 +115,11 @@ class App extends React.Component {
                   className="controls_block"/>
             </div>
           </div>
-      <div id="footer">
-        <span>©AlexanderMikhaylov 2021</span>
-        <span className="descr">this is a team students project</span>
-      </div>
+          <Result result = {this.state.result}/>
+          <div id="footer">
+            <span>©AlexanderMikhaylov 2021</span>
+            <span className="descr">this is a team students project</span>
+          </div>
         </div>
     )
   }
