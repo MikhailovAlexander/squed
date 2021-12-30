@@ -54,6 +54,7 @@ class TagControls extends React.Component {
     searchButtonClick = () => {
         if(window.confirm(this.msgConfirmSearchTags)) this.handlers.searchTags();
     }
+    analyseButtonClick = () => {this.handlers.analyseTags();}
     saveButtonClick = () => {
         let newTagKey = this.state.tempValue;
         if(this.isTagsContains(newTagKey)){
@@ -87,6 +88,9 @@ class TagControls extends React.Component {
                     <button
                         disabled={this.state.addMode || this.state.editMode}
                         onClick={this.searchButtonClick}>Найти в запросе</button>
+                    <button
+                        disabled={this.state.addMode || this.state.editMode}
+                        onClick={this.analyseButtonClick}>Анализ запроса</button>
                 </div>
                 <table id="tags_list">
                     <thead>

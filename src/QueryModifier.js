@@ -35,6 +35,31 @@ class QueryModifier{
         ));
     }
 
+    analyseTags(queryText){
+        let tagSet = this.getTagsSet(queryText);
+        const modes = ["set","add","rem"];
+        const result = [];
+        let tagPattern, matches;
+        for(let tag of tagSet){
+            let row = {
+                key: tag,
+                set: {cnt: 0, rows: 0},
+                add: {cnt: 0, rows: 0},
+                rem: {cnt: 0, rows: 0}
+            }
+            for(let mode of modes) {
+                tagPattern = this.getPattern(tag + "_" + mode, true);
+                matches = queryText.matchAll(tagPattern);
+                for (let match of matches) {
+                    row[mode]["rows"] += match[0].split('\n').length;
+                    row[mode]["cnt"]++;
+                }
+            }
+            result.push(row);
+        }
+        return result;
+    }
+
     getPattern(tag, removeMode){
         let tagPattern  = "(\\/\\*)?(\\/)?" + tag + "(\\*\\/)?"
         if(removeMode){
