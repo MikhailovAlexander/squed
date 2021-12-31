@@ -4,7 +4,7 @@ class Result extends React.Component {
     render() {
         return (
             <div className="result">
-                <label className>{this.props.result.label}</label>
+                <label>{this.props.result.label}</label>
                 <table className="result_tb">
                     <thead className="result_tb">
                     <tr className="result_tb">

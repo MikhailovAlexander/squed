@@ -10,6 +10,7 @@ import './App.css';
 import 'prismjs/themes/prism.css';
 
 const queryModifier = new QueryModifier();
+const version = "0.2";
 
 class App extends React.Component {
   constructor(props) {
@@ -117,8 +118,11 @@ class App extends React.Component {
           </div>
           <Result result = {this.state.result}/>
           <div id="footer">
-            <span>©AlexanderMikhaylov 2021</span>
-            <span className="descr">this is a team students project</span>
+            <div className="footer_info">
+              <div className="copyright">©AlexanderMikhaylov 2021</div>
+              <div className="descr">This is a team students project</div>
+            </div>
+            <div className="version">{"version " + version}</div>
           </div>
         </div>
     )
