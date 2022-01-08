@@ -16,6 +16,7 @@ class QueryModifier{
     ];
 
     checkTagKey(key){
+        if (key === undefined || key === null) return false;
         let keyPattern = new RegExp("^[a-z0-9_]+$","gi");
         let keyAntiPattern = new RegExp(".*_(add|rem|set).*","gi");
         return keyPattern.test(key) && !keyAntiPattern.test(key);

@@ -1,23 +1,18 @@
 import React from 'react';
-import TagControls from './components/TagControls';
-import Result from './components/Result';
-import QueryModifier from './QueryModifier';
-import Editor from 'react-simple-code-editor';
+import Result from './Result';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-sql';
-import './App.css';
 import 'prismjs/themes/prism.css';
+import TagControlsRedux from "../containers/TagControlsRedux";
+import Editor from "react-simple-code-editor";
 
-const queryModifier = new QueryModifier();
 const version = "0.2";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: queryModifier.querySample,
-      tags: queryModifier.tagsSample,
       result:{
         label: "Результат выполнения запроса",
         header: [],
@@ -32,46 +27,11 @@ class App extends React.Component {
   }
 
   tagHandlers = {
-    checkTagKey: queryModifier.checkTagKey,
-    updateTag: (updatedTag) => {
-      const newTags = this.state.tags.map(tag => {
-            if (tag.key === updatedTag.key) return updatedTag;
-            return tag;
-          }
-      )
-      this.setState({tags: newTags});
-    },
-    updateTagKey: (updatedTagKey, currentTagKey) => {
-      const newTags = this.state.tags.map(tag => {
-            if (tag.key === currentTagKey) return {
-              key: updatedTagKey, value: tag.value, set_mode: tag.set_mode, set_value: tag.set_value};
-            return tag;
-          }
-      )
-      this.setState({tags: newTags});
-    },
-    addTag: (newTagKey) => {
-      const newTags = this.state.tags.concat(
-          {key: newTagKey, value: false, set_mode: false, set_value: undefined});
-      this.setState({tags: newTags});
-    },
-    remTag: (remTagKey) => {
-      const newTags = this.state.tags.filter(tag => tag.key !== remTagKey);
-      this.setState({tags: newTags});
-    },
-    clearTags: () => {
-      const newTags = [];
-      this.setState({tags: newTags});
-    },
-    searchTags: () => {
-      const newTags = queryModifier.searchTags(this.state.query);
-      this.setState({tags: newTags});
-    },
     analyseTags: () => {
       const label = "Анализ тегов в исходном запросе";
       const header = ["Имя","Количество подстановок","в т.ч. строк","Количество добавлений","в т.ч. строк",
         "Количество удалений","в т.ч. строк"];
-      const values = queryModifier.analyseTags(this.state.query);
+      const values = this.props.queryModifier.analyseTags(this.props.query);
       this.setState({result: {label: label, header: header, values: values}});
     }
   }
@@ -87,8 +47,8 @@ class App extends React.Component {
               <label>Исходный запрос:</label>
               <Editor
                   className="query"
-                  value={this.state.query}
-                  onValueChange={code => this.setState({query: code})}
+                  value={this.props.query}
+                  onValueChange={code => this.props.setQuery(code)}
                   highlight={code => highlight(code, languages.sql)}
               />
             </div>
@@ -96,7 +56,7 @@ class App extends React.Component {
               <label>Модифицированный запрос:</label>
               <Editor
                   className="query"
-                  value={queryModifier.modifyText(this.state.query, this.state.tags)}
+                  value={this.props.queryModifier.modifyText(this.props.query, this.props.tags)}
                   disabled={true}
                   highlight={code => highlight(code, languages.sql)}
               />
@@ -111,8 +71,8 @@ class App extends React.Component {
                 </select>
                 <button id="check_btn">Выполнить запрос</button>
               </div>
-              <TagControls
-                  tags={this.state.tags} handlers = {this.tagHandlers}
+              <TagControlsRedux
+                  handlers = {this.tagHandlers}
                   className="controls_block"/>
             </div>
           </div>

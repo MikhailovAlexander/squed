@@ -9,7 +9,7 @@ class Tag extends React.Component {
             value: event.target.checked,
             set_mode: this.props.tag.set_mode,
             set_value: this.props.tag.set_value};
-        this.props.handlers.updateTagHandler(updatedTag);
+        this.props.updateTag(updatedTag);
     }
     changeTagSetMode = (event) => {
         const updatedTag =  {
@@ -17,7 +17,7 @@ class Tag extends React.Component {
             value: this.props.tag.value,
             set_mode: event.target.checked,
             set_value: this.props.tag.set_value};
-        this.props.handlers.updateTagHandler(updatedTag);
+        this.props.updateTag(updatedTag);
     }
     changeTagSetValue = (event) => {
         const updatedTag =  {
@@ -25,7 +25,7 @@ class Tag extends React.Component {
             value: this.props.tag.value,
             set_mode: this.props.tag.set_mode,
             set_value: event.target.value};
-        this.props.handlers.updateTagHandler(updatedTag);
+        this.props.updateTag(updatedTag);
     }
     tagClick = () => {
         if (this.props.isCurrent) return;

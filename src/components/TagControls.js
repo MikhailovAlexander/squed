@@ -1,5 +1,5 @@
 import React from 'react';
-import Tag from "./Tag";
+import TagRedux from "../containers/TagRedux";
 
 class TagControls extends React.Component {
     constructor(props) {
@@ -37,7 +37,7 @@ class TagControls extends React.Component {
             alert(this.msgErrorEmptyCurrentTag);
             return;
         }
-        if(window.confirm(this.msgConfirmDeleteTag)) this.handlers.remTag(this.state.currentTag);
+        if(window.confirm(this.msgConfirmDeleteTag)) this.props.remTag(this.state.currentTag);
         this.setState({currentTag: undefined});
     }
     editButtonClick = () => {
@@ -48,11 +48,15 @@ class TagControls extends React.Component {
         this.setState({editMode: true, tempValue: this.state.currentTag});
     }
     clearButtonClick = () => {
-        if(window.confirm(this.msgConfirmClearTags)) this.handlers.clearTags();
+        const emptyList = [];
+        if(window.confirm(this.msgConfirmClearTags)) this.props.setTags(emptyList);
         this.setState({currentTag: undefined, tempValue: undefined});
     }
     searchButtonClick = () => {
-        if(window.confirm(this.msgConfirmSearchTags)) this.handlers.searchTags();
+        if(window.confirm(this.msgConfirmSearchTags)) {
+            const newTags = this.props.queryModifier.searchTags(this.props.query);
+            this.props.setTags(newTags);
+        }
     }
     analyseButtonClick = () => {this.handlers.analyseTags();}
     saveButtonClick = () => {
@@ -61,13 +65,13 @@ class TagControls extends React.Component {
             alert(this.msgErrorDuplicateTagName);
             return;
         }
-        if(!this.handlers.checkTagKey(newTagKey)){
+        if(!this.props.queryModifier.checkTagKey(newTagKey)){
             alert(this.msgErrorCheckTagKey);
             return;
         }
-        if(this.state.addMode) this.handlers.addTag(newTagKey);
+        if(this.state.addMode) this.props.addTag(newTagKey);
         if(this.state.editMode){
-            this.handlers.updateTagKey(newTagKey, this.state.currentTag);
+            this.props.updateTagKey(newTagKey, this.state.currentTag);
             this.setState({currentTag: undefined});
         }
         this.setState({tempValue: undefined, addMode: false, editMode:false});
@@ -101,12 +105,10 @@ class TagControls extends React.Component {
                     </thead>
                     <tbody>
                     {this.props.tags.map(tag => (
-                        <Tag
+                        <TagRedux
                             key = {tag.key}
                             tag = {tag}
-                            handlers = {{
-                                updateTagHandler: this.handlers.updateTag,
-                                clickTagHandler: this.clickTag}}
+                            handlers = {{clickTagHandler: this.clickTag}}
                             isCurrent = {this.state.currentTag === tag.key}/>
                     ))}
                     </tbody>
