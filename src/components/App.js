@@ -66,7 +66,7 @@ class App extends React.Component {
                 <label>Выбор базы данных</label>
                 <select id="db_list" onChange={this.changeDb}>
                   {this.state.dbList.map(db => (
-                      <option>{db}</option>
+                      <option key={db}>{db}</option>
                   ))}
                 </select>
                 <button id="check_btn">Выполнить запрос</button>
