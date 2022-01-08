@@ -1,0 +1,2 @@
+const SET_TAGS_ADD_MODE = "SET_TAGS_ADD_MODE";
+export default SET_TAGS_ADD_MODE;

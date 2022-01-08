@@ -28,8 +28,8 @@ class Tag extends React.Component {
         this.props.updateTag(updatedTag);
     }
     tagClick = () => {
-        if (this.props.isCurrent) return;
-        this.props.handlers.clickTagHandler(this.props.tag.key);
+        if (this.props.isCurrent || this.props.tagsEditMode || this.props.tagsAddMode) return;
+        this.props.setCurrentTag(this.props.tag.key);
     }
     render() {
         return (

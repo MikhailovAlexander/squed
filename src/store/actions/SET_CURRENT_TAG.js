@@ -1,0 +1,2 @@
+const SET_CURRENT_TAG = "SET_CURRENT_TAG";
+export default SET_CURRENT_TAG;

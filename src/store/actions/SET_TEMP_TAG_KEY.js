@@ -1,0 +1,2 @@
+const SET_TEMP_TAG_KEY = "SET_TEMP_TAG_KEY";
+export default SET_TEMP_TAG_KEY;

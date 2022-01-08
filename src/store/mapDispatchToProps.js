@@ -5,6 +5,10 @@ import remTag from "./actionCreators/remTag";
 import setTags from "./actionCreators/setTags";
 import updateTag from "./actionCreators/updateTag";
 import updateTagKey from "./actionCreators/updateTagKey";
+import setCurrentTag from "./actionCreators/setCurrentTag";
+import setTagsEditMode from "./actionCreators/setTagsEditMode";
+import setTagsAddMode from "./actionCreators/setTagsAddMode";
+import setTempTagKey from "./actionCreators/setTempTagKey";
 
 function mapDispatchToProps(component) {
     switch (component) {
@@ -18,12 +22,17 @@ function mapDispatchToProps(component) {
                 addTag: bindActionCreators(addTag, dispatch),
                 remTag: bindActionCreators(remTag, dispatch),
                 setTags: bindActionCreators(setTags, dispatch),
-                updateTagKey: bindActionCreators(updateTagKey, dispatch)
+                updateTagKey: bindActionCreators(updateTagKey, dispatch),
+                setCurrentTag: bindActionCreators(setCurrentTag, dispatch),
+                setTagsEditMode: bindActionCreators(setTagsEditMode, dispatch),
+                setTagsAddMode: bindActionCreators(setTagsAddMode, dispatch),
+                setTempTagKey: bindActionCreators(setTempTagKey, dispatch)
             };
         };
         case "Tag": return function (dispatch) {
             return {
                 updateTag: bindActionCreators(updateTag, dispatch),
+                setCurrentTag: bindActionCreators(setCurrentTag, dispatch)
             };
         };
         default: return undefined;

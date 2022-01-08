@@ -6,6 +6,10 @@ const initQuery = queryModifier.querySample;
 const initialState = {
     queryModifier: queryModifier,
     tags: initTags,
+    currentTag: null,
+    tagsEditMode: false,
+    tagsAddMode: false,
+    tempTagKey: "",
     query: initQuery
 };
 

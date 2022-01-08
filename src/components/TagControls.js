@@ -4,12 +4,6 @@ import TagRedux from "../containers/TagRedux";
 class TagControls extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            currentTag: undefined,
-            tempValue: undefined,
-            addMode: false,
-            editMode:false
-        };
         this.handlers = this.props.handlers;
         this.addPlaceholder = "Введите имя нового тега";
         this.msgErrorDuplicateTagName = "Тег с введенным именем уже существует";
@@ -25,42 +19,41 @@ class TagControls extends React.Component {
     isTagsContains = (newTagName) => {
         return this.props.tags.reduce((curVal, tag) => curVal || (tag.key === newTagName), false);
     }
-    clickTag = (key) => {
-        if(this.state.editMode) return;
-        this.setState({currentTag: key});
-    }
     addButtonClick = () => {
-        this.setState({addMode: true});
+        this.props.setTagsAddMode(true);
     }
     remButtonClick = () => {
-        if(this.state.currentTag === undefined){
+        if(this.props.currentTag === null){
             alert(this.msgErrorEmptyCurrentTag);
             return;
         }
-        if(window.confirm(this.msgConfirmDeleteTag)) this.props.remTag(this.state.currentTag);
-        this.setState({currentTag: undefined});
+        if(window.confirm(this.msgConfirmDeleteTag)) this.props.remTag(this.props.currentTag);
+        this.props.setCurrentTag(null);
     }
     editButtonClick = () => {
-        if(this.state.currentTag === undefined){
+        if(this.props.currentTag === null){
             alert(this.msgErrorEmptyCurrentTag);
             return;
         }
-        this.setState({editMode: true, tempValue: this.state.currentTag});
+        this.props.setTagsEditMode(true);
+        this.props.setTempTagKey(this.props.currentTag);
     }
     clearButtonClick = () => {
         const emptyList = [];
         if(window.confirm(this.msgConfirmClearTags)) this.props.setTags(emptyList);
-        this.setState({currentTag: undefined, tempValue: undefined});
+        this.props.setCurrentTag(null);
+        this.props.setTempTagKey("");
     }
     searchButtonClick = () => {
         if(window.confirm(this.msgConfirmSearchTags)) {
             const newTags = this.props.queryModifier.searchTags(this.props.query);
             this.props.setTags(newTags);
+            this.props.setCurrentTag(null);
         }
     }
     analyseButtonClick = () => {this.handlers.analyseTags();}
     saveButtonClick = () => {
-        let newTagKey = this.state.tempValue;
+        let newTagKey = this.props.tempTagKey;
         if(this.isTagsContains(newTagKey)){
             alert(this.msgErrorDuplicateTagName);
             return;
@@ -69,15 +62,22 @@ class TagControls extends React.Component {
             alert(this.msgErrorCheckTagKey);
             return;
         }
-        if(this.state.addMode) this.props.addTag(newTagKey);
-        if(this.state.editMode){
-            this.props.updateTagKey(newTagKey, this.state.currentTag);
-            this.setState({currentTag: undefined});
+        if(this.props.tagsAddMode) this.props.addTag(newTagKey);
+        if(this.props.tagsEditMode){
+            this.props.updateTagKey(newTagKey, this.props.currentTag);
+            this.props.setCurrentTag(null);
         }
-        this.setState({tempValue: undefined, addMode: false, editMode:false});
+        this.props.setTagsEditMode(false);
+        this.props.setTagsAddMode(false);
+        this.props.setTempTagKey("");
     }
     cancelButtonClick = () => {
-        this.setState({tempValue: undefined, addMode: false, editMode:false});
+        this.props.setTagsEditMode(false);
+        this.props.setTagsAddMode(false);
+        this.props.setTempTagKey("");
+    }
+    updateTempTagKey = (event) => {
+        this.props.setTempTagKey(event.target.value);
     }
 
     render() {
@@ -87,13 +87,13 @@ class TagControls extends React.Component {
                 <div className="btn_block">
                     <button
                         id="clr_tag_btn"
-                        disabled={this.state.addMode || this.state.editMode}
+                        disabled={this.props.tagsEditMode || this.props.tagsAddMode}
                         onClick={this.clearButtonClick}>Очистить</button>
                     <button
-                        disabled={this.state.addMode || this.state.editMode}
+                        disabled={this.props.tagsEditMode || this.props.tagsAddMode}
                         onClick={this.searchButtonClick}>Найти в запросе</button>
                     <button
-                        disabled={this.state.addMode || this.state.editMode}
+                        disabled={this.props.tagsEditMode || this.props.tagsAddMode}
                         onClick={this.analyseButtonClick}>Анализ запроса</button>
                 </div>
                 <table id="tags_list">
@@ -108,32 +108,29 @@ class TagControls extends React.Component {
                         <TagRedux
                             key = {tag.key}
                             tag = {tag}
-                            handlers = {{clickTagHandler: this.clickTag}}
-                            isCurrent = {this.state.currentTag === tag.key}/>
+                            isCurrent = {this.props.currentTag === tag.key}/>
                     ))}
                     </tbody>
                 </table>
                 <div className="btn_block">
                     <button
                         id="add_tag_btn"
-                        disabled={this.state.addMode || this.state.editMode}
+                        disabled={this.props.tagsEditMode || this.props.tagsAddMode}
                         onClick={this.addButtonClick}>+</button>
                     <button
                         id="rem_tag_btn"
-                        disabled={this.state.addMode || this.state.editMode}
+                        disabled={this.props.tagsEditMode || this.props.tagsAddMode}
                         onClick={this.remButtonClick}>-</button>
                     <button
                          id="edt_tag_btn"
-                         disabled={this.state.addMode || this.state.editMode}
+                         disabled={this.props.tagsEditMode || this.props.tagsAddMode}
                          onClick={this.editButtonClick}>...</button>
-                    <div hidden={!this.state.addMode && !this.state.editMode}>
+                    <div hidden={!this.props.tagsEditMode && !this.props.tagsAddMode}>
                         <input
                             type="text"
-                            placeholder={this.state.addMode ? this.addPlaceholder : undefined}
-                            value={this.state.tempValue}
-                            onChange={(event) => {
-                                this.setState({tempValue: event.target.value})}
-                            }
+                            placeholder={this.props.tagsAddMode ? this.addPlaceholder : undefined}
+                            value={this.props.tempTagKey}
+                            onChange={this.updateTempTagKey}
                             onKeyUp={(event) => {
                                 if(event.key === "Enter") this.saveButtonClick();
                             }}
