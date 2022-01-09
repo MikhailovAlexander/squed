@@ -4,6 +4,9 @@ class DbControls extends React.Component {
     changeDb = (event) => {
         this.props.setCurrentDb(String(event.target.value));
     }
+    componentDidMount() {
+        this.props.fetchDbList('./db_connect/db_list.json');
+    }
     render() {
         return (
             <div id="db_list_area" className="controls_block">

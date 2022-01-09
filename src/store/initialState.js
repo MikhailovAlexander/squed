@@ -16,7 +16,7 @@ const initialState = {
         header: [],
         values: []
     },
-    dbList: ["SqlServer", "PostgreSql"],
+    dbList: [],
     currentDb: null
 };
 
