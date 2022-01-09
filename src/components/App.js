@@ -2,21 +2,11 @@ import React from 'react';
 import TagControlsRedux from "../containers/TagControlsRedux";
 import ResultRedux from "../containers/ResultRedux";
 import EditorsRedux from "../containers/EditorsRedux";
+import DbControlsRedux from "../containers/DbControlsRedux";
 
 const version = "0.2";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dbList: ["SqlServer", "PostgreSql"],
-      currentDb: undefined
-    };
-  }
-  changeDb = (event) => {
-    this.setState({currentDb: String(event.target.value)});
-  }
-
   render() {
     return (
         <div id="app">
@@ -27,18 +17,8 @@ class App extends React.Component {
           <div id="workspace">
             <EditorsRedux/>
             <div id="controls">
-              <div id="db_list_area" className="controls_block">
-                <label>Выбор базы данных</label>
-                <select id="db_list" onChange={this.changeDb}>
-                  {this.state.dbList.map(db => (
-                      <option key={db}>{db}</option>
-                  ))}
-                </select>
-                <button id="check_btn">Выполнить запрос</button>
-              </div>
-              <TagControlsRedux
-                  handlers = {this.tagHandlers}
-                  className="controls_block"/>
+              <DbControlsRedux/>
+              <TagControlsRedux className="controls_block"/>
             </div>
           </div>
           <ResultRedux/>

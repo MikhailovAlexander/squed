@@ -7,6 +7,8 @@ import tagsEditMode from "./tagsEditMode";
 import tagsAddMode from "./tagsAddMode";
 import tempTagKey from "./tempTagKey";
 import result from "./result";
+import dbList from "./dbList";
+import currentDb from "./currentDb";
 
 const reducers = combineReducers({
     queryModifier,
@@ -16,7 +18,9 @@ const reducers = combineReducers({
     tagsAddMode,
     tempTagKey,
     query,
-    result
+    result,
+    dbList,
+    currentDb
 });
 
 export default reducers;

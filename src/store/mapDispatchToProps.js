@@ -10,12 +10,21 @@ import setTagsEditMode from "./actionCreators/setTagsEditMode";
 import setTagsAddMode from "./actionCreators/setTagsAddMode";
 import setTempTagKey from "./actionCreators/setTempTagKey";
 import setResult from "./actionCreators/setResult";
+import setDbList from "./actionCreators/setDbList";
+import setCurrentDb from "./actionCreators/setCurrentDb";
 
 function mapDispatchToProps(component) {
     switch (component) {
         case "Editors": return function (dispatch) {
             return {
                 setQuery: bindActionCreators(setQuery, dispatch)
+            };
+        };
+        case "DbControls": return function (dispatch) {
+            return {
+                setDbList: bindActionCreators(setDbList, dispatch),
+                setCurrentDb: bindActionCreators(setCurrentDb, dispatch),
+                setResult: bindActionCreators(setResult, dispatch)
             };
         };
         case "TagControls": return function (dispatch) {

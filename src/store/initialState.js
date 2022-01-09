@@ -15,7 +15,9 @@ const initialState = {
         label: "Результат выполнения запроса",
         header: [],
         values: []
-    }
+    },
+    dbList: ["SqlServer", "PostgreSql"],
+    currentDb: null
 };
 
 export default initialState;

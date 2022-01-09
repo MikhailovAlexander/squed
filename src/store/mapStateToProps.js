@@ -9,6 +9,17 @@ function mapStateToProps(component) {
                 };
             }
         }
+        case "DbControls": {
+            return function (state) {
+                return {
+                    queryModifier: state.queryModifier,
+                    tags: state.tags,
+                    query: state.query,
+                    dbList: state.dbList,
+                    currentDb: state.currentDb
+                };
+            }
+        }
         case "TagControls": {
             return function (state) {
                 return {

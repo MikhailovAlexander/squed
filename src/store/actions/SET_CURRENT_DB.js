@@ -1,0 +1,2 @@
+const SET_CURRENT_DB = "SET_CURRENT_DB";
+export default SET_CURRENT_DB;
