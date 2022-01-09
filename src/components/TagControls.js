@@ -4,7 +4,6 @@ import TagRedux from "../containers/TagRedux";
 class TagControls extends React.Component {
     constructor(props) {
         super(props);
-        this.handlers = this.props.handlers;
         this.addPlaceholder = "Введите имя нового тега";
         this.msgErrorDuplicateTagName = "Тег с введенным именем уже существует";
         this.msgErrorEmptyCurrentTag = "Не выбран ни один тег из списка";
@@ -51,7 +50,13 @@ class TagControls extends React.Component {
             this.props.setCurrentTag(null);
         }
     }
-    analyseButtonClick = () => {this.handlers.analyseTags();}
+    analyseButtonClick = () => {
+        const label = "Анализ тегов в исходном запросе";
+        const header = ["Имя","Количество подстановок","в т.ч. строк","Количество добавлений","в т.ч. строк",
+            "Количество удалений","в т.ч. строк"];
+        const values = this.props.queryModifier.analyseTags(this.props.query);
+        this.props.setResult({label: label, header: header, values: values});
+    }
     saveButtonClick = () => {
         let newTagKey = this.props.tempTagKey;
         if(this.isTagsContains(newTagKey)){

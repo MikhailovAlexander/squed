@@ -1,5 +1,6 @@
 import tagsAddMode from "./reducers/tagsAddMode";
 import tempTagKey from "./reducers/tempTagKey";
+import result from "./reducers/result";
 
 function mapStateToProps(component) {
     switch (component) {
@@ -32,6 +33,13 @@ function mapStateToProps(component) {
                     currentTag: state.currentTag,
                     tagsEditMode: state.tagsEditMode,
                     tagsAddMode: state.tagsAddMode,
+                };
+            }
+        }
+        case "Result": {
+            return function (state) {
+                return {
+                    result: state.result
                 };
             }
         }

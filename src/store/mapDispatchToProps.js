@@ -9,6 +9,7 @@ import setCurrentTag from "./actionCreators/setCurrentTag";
 import setTagsEditMode from "./actionCreators/setTagsEditMode";
 import setTagsAddMode from "./actionCreators/setTagsAddMode";
 import setTempTagKey from "./actionCreators/setTempTagKey";
+import setResult from "./actionCreators/setResult";
 
 function mapDispatchToProps(component) {
     switch (component) {
@@ -26,7 +27,8 @@ function mapDispatchToProps(component) {
                 setCurrentTag: bindActionCreators(setCurrentTag, dispatch),
                 setTagsEditMode: bindActionCreators(setTagsEditMode, dispatch),
                 setTagsAddMode: bindActionCreators(setTagsAddMode, dispatch),
-                setTempTagKey: bindActionCreators(setTempTagKey, dispatch)
+                setTempTagKey: bindActionCreators(setTempTagKey, dispatch),
+                setResult: bindActionCreators(setResult, dispatch)
             };
         };
         case "Tag": return function (dispatch) {

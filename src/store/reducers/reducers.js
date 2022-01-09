@@ -6,6 +6,7 @@ import queryModifier from "./queryModifier";
 import tagsEditMode from "./tagsEditMode";
 import tagsAddMode from "./tagsAddMode";
 import tempTagKey from "./tempTagKey";
+import result from "./result";
 
 const reducers = combineReducers({
     queryModifier,
@@ -14,7 +15,8 @@ const reducers = combineReducers({
     tagsEditMode,
     tagsAddMode,
     tempTagKey,
-    query
+    query,
+    result
 });
 
 export default reducers;

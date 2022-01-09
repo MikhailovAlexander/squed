@@ -1,11 +1,11 @@
 import React from 'react';
-import Result from './Result';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-sql';
 import 'prismjs/themes/prism.css';
 import TagControlsRedux from "../containers/TagControlsRedux";
 import Editor from "react-simple-code-editor";
+import ResultRedux from "../containers/ResultRedux";
 
 const version = "0.2";
 
@@ -13,11 +13,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      result:{
-        label: "Результат выполнения запроса",
-        header: [],
-        values: []
-      },
       dbList: ["SqlServer", "PostgreSql"],
       currentDb: undefined
     };
@@ -26,15 +21,6 @@ class App extends React.Component {
     this.setState({currentDb: String(event.target.value)});
   }
 
-  tagHandlers = {
-    analyseTags: () => {
-      const label = "Анализ тегов в исходном запросе";
-      const header = ["Имя","Количество подстановок","в т.ч. строк","Количество добавлений","в т.ч. строк",
-        "Количество удалений","в т.ч. строк"];
-      const values = this.props.queryModifier.analyseTags(this.props.query);
-      this.setState({result: {label: label, header: header, values: values}});
-    }
-  }
   render() {
     return (
         <div id="app">
@@ -76,7 +62,7 @@ class App extends React.Component {
                   className="controls_block"/>
             </div>
           </div>
-          <Result result = {this.state.result}/>
+          <ResultRedux/>
           <div id="footer">
             <div className="footer_info">
               <div className="copyright">©AlexanderMikhaylov 2021</div>

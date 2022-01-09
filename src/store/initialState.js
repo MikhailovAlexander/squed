@@ -10,7 +10,12 @@ const initialState = {
     tagsEditMode: false,
     tagsAddMode: false,
     tempTagKey: "",
-    query: initQuery
+    query: initQuery,
+    result: {
+        label: "Результат выполнения запроса",
+        header: [],
+        values: []
+    }
 };
 
 export default initialState;
