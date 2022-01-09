@@ -27,6 +27,13 @@ html, body, #root{
   justify-content: start;
   height: 100%;
 }
+.editors{
+   display: flex;
+   flex-direction: row;
+   justify-content: start;
+   width: 100%;
+   height: 100%;
+ }
 .edit_panel{
   display: flex;
   flex-direction: column;

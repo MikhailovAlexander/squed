@@ -1,11 +1,7 @@
 import React from 'react';
-import { highlight, languages } from 'prismjs/components/prism-core';
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-sql';
-import 'prismjs/themes/prism.css';
 import TagControlsRedux from "../containers/TagControlsRedux";
-import Editor from "react-simple-code-editor";
 import ResultRedux from "../containers/ResultRedux";
+import EditorsRedux from "../containers/EditorsRedux";
 
 const version = "0.2";
 
@@ -29,24 +25,7 @@ class App extends React.Component {
             <span className="descr">Онлайн-редактор для отладки SQL-запросов с динамической модификацией</span>
           </div>
           <div id="workspace">
-            <div id="src_query_panel" className="edit_panel">
-              <label>Исходный запрос:</label>
-              <Editor
-                  className="query"
-                  value={this.props.query}
-                  onValueChange={code => this.props.setQuery(code)}
-                  highlight={code => highlight(code, languages.sql)}
-              />
-            </div>
-            <div id="trg_query_panel" className="edit_panel">
-              <label>Модифицированный запрос:</label>
-              <Editor
-                  className="query"
-                  value={this.props.queryModifier.modifyText(this.props.query, this.props.tags)}
-                  disabled={true}
-                  highlight={code => highlight(code, languages.sql)}
-              />
-            </div>
+            <EditorsRedux/>
             <div id="controls">
               <div id="db_list_area" className="controls_block">
                 <label>Выбор базы данных</label>

@@ -1,10 +1,6 @@
-import tagsAddMode from "./reducers/tagsAddMode";
-import tempTagKey from "./reducers/tempTagKey";
-import result from "./reducers/result";
-
 function mapStateToProps(component) {
     switch (component) {
-        case "App": {
+        case "Editors": {
             return function (state) {
                 return {
                     queryModifier: state.queryModifier,

@@ -13,7 +13,7 @@ import setResult from "./actionCreators/setResult";
 
 function mapDispatchToProps(component) {
     switch (component) {
-        case "App": return function (dispatch) {
+        case "Editors": return function (dispatch) {
             return {
                 setQuery: bindActionCreators(setQuery, dispatch)
             };
