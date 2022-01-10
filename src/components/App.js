@@ -4,7 +4,7 @@ import ResultRedux from "../containers/ResultRedux";
 import EditorsRedux from "../containers/EditorsRedux";
 import DbControlsRedux from "../containers/DbControlsRedux";
 
-const version = "0.2";
+const version = "0.21";
 
 class App extends React.Component {
   render() {

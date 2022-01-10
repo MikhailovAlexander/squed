@@ -1,11 +1,12 @@
 import React from 'react';
 
+const dbListURL = './db_connect/getDbList.php';
 class DbControls extends React.Component {
     changeDb = (event) => {
         this.props.setCurrentDb(String(event.target.value));
     }
     componentDidMount() {
-        this.props.fetchDbList('./db_connect/db_list.json');
+        this.props.fetchDbList(dbListURL);
     }
     render() {
         return (

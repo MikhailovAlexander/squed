@@ -1,0 +1,20 @@
+{
+  "dblist": [
+    {
+      "name": "test1",
+      "host": "host1",
+      "port": "port1",
+      "dbname": "dbname1",
+      "user": "user",
+      "password": "password"
+    },
+    {
+      "name": "test2",
+      "host": "host2",
+      "port": "port2",
+      "dbname": "dbname2",
+      "user": "user",
+      "password": "password"
+    }
+  ]
+}
