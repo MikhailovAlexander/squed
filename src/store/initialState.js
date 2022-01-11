@@ -16,6 +16,9 @@ const initialState = {
         header: [],
         values: []
     },
+    resultIsLoading: false,
+    resultHasError: false,
+    resultError: "",
     dbList: [],
     currentDb: null
 };

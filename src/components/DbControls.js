@@ -1,9 +1,14 @@
 import React from 'react';
 
 const dbListURL = './db_connect/getDbList.php';
+const getResultURL = './db_connect/getResult.php';
+
 class DbControls extends React.Component {
     changeDb = (event) => {
         this.props.setCurrentDb(String(event.target.value));
+    }
+    runQuery = () => {
+        this.props.fetchQueryResult(getResultURL, this.props.currentDb, this.props.query);
     }
     componentDidMount() {
         this.props.fetchDbList(dbListURL);
@@ -17,7 +22,10 @@ class DbControls extends React.Component {
                         <option key={db}>{db}</option>
                     ))}
                 </select>
-                <button id="check_btn">Выполнить запрос</button>
+                <button
+                    id="check_btn"
+                    disabled={this.props.resultIsLoading}
+                    onClick={this.runQuery}>Выполнить запрос</button>
             </div>
         );
     }

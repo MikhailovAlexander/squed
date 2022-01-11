@@ -15,6 +15,8 @@ function mapStateToProps(component) {
                     queryModifier: state.queryModifier,
                     tags: state.tags,
                     query: state.query,
+                    resultIsLoading: state.resultIsLoading,
+                    resultHasError: state.resultHasError,
                     dbList: state.dbList,
                     currentDb: state.currentDb
                 };
@@ -46,7 +48,9 @@ function mapStateToProps(component) {
         case "Result": {
             return function (state) {
                 return {
-                    result: state.result
+                    result: state.result,
+                    resultHasError: state.resultHasError,
+                    resultError: state.resultError
                 };
             }
         }

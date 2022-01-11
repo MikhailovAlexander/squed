@@ -9,6 +9,9 @@ import tempTagKey from "./tempTagKey";
 import result from "./result";
 import dbList from "./dbList";
 import currentDb from "./currentDb";
+import resultIsLoading from "./resultIsLoading";
+import resultHasError from "./resultHasError";
+import resultError from "./resultError";
 
 const reducers = combineReducers({
     queryModifier,
@@ -19,6 +22,9 @@ const reducers = combineReducers({
     tempTagKey,
     query,
     result,
+    resultIsLoading,
+    resultHasError,
+    resultError,
     dbList,
     currentDb
 });

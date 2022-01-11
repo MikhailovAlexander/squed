@@ -13,6 +13,7 @@ import setResult from "./actionCreators/setResult";
 import setDbList from "./actionCreators/setDbList";
 import setCurrentDb from "./actionCreators/setCurrentDb";
 import fetchDbList from "./asyncActions/fetchDbList";
+import fetchQueryResult from "./asyncActions/fetchQueryResult";
 
 function mapDispatchToProps(component) {
     switch (component) {
@@ -26,7 +27,8 @@ function mapDispatchToProps(component) {
                 setDbList: bindActionCreators(setDbList, dispatch),
                 setCurrentDb: bindActionCreators(setCurrentDb, dispatch),
                 setResult: bindActionCreators(setResult, dispatch),
-                fetchDbList: (url) => dispatch(fetchDbList(url))
+                fetchDbList: (url) => dispatch(fetchDbList(url)),
+                fetchQueryResult: (url, dbName, query) => dispatch(fetchQueryResult(url, dbName, query))
             };
         };
         case "TagControls": return function (dispatch) {
