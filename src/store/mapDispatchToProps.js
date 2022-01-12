@@ -10,10 +10,11 @@ import setTagsEditMode from "./actionCreators/setTagsEditMode";
 import setTagsAddMode from "./actionCreators/setTagsAddMode";
 import setTempTagKey from "./actionCreators/setTempTagKey";
 import setResult from "./actionCreators/setResult";
-import setDbList from "./actionCreators/setDbList";
 import setCurrentDb from "./actionCreators/setCurrentDb";
 import fetchDbList from "./asyncActions/fetchDbList";
 import fetchQueryResult from "./asyncActions/fetchQueryResult";
+import setResultHasError from "./actionCreators/setResultHasError";
+import setResultError from "./actionCreators/setResultError";
 
 function mapDispatchToProps(component) {
     switch (component) {
@@ -24,9 +25,7 @@ function mapDispatchToProps(component) {
         };
         case "DbControls": return function (dispatch) {
             return {
-                setDbList: bindActionCreators(setDbList, dispatch),
                 setCurrentDb: bindActionCreators(setCurrentDb, dispatch),
-                setResult: bindActionCreators(setResult, dispatch),
                 fetchDbList: (url) => dispatch(fetchDbList(url)),
                 fetchQueryResult: (url, dbName, query) => dispatch(fetchQueryResult(url, dbName, query))
             };
@@ -41,7 +40,9 @@ function mapDispatchToProps(component) {
                 setTagsEditMode: bindActionCreators(setTagsEditMode, dispatch),
                 setTagsAddMode: bindActionCreators(setTagsAddMode, dispatch),
                 setTempTagKey: bindActionCreators(setTempTagKey, dispatch),
-                setResult: bindActionCreators(setResult, dispatch)
+                setResult: bindActionCreators(setResult, dispatch),
+                setResultHasError: bindActionCreators(setResultHasError, dispatch),
+                setResultError: bindActionCreators(setResultError, dispatch)
             };
         };
         case "Tag": return function (dispatch) {

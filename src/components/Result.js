@@ -5,6 +5,10 @@ class Result extends React.Component {
         return (
             <div className="result">
                 <label>{this.props.result.label}</label>
+                <div hidden={!this.props.resultHasError}>
+                    <div className="result_error">Запрос завершен с ошибкой:</div>
+                    <div className="result_error">{this.props.resultError}</div>
+                </div>
                 <table className="result_tb">
                     <thead className="result_tb">
                     <tr className="result_tb">

@@ -22,7 +22,7 @@ class Editors extends React.Component {
                     <label>Модифицированный запрос:</label>
                     <Editor
                         className="query"
-                        value={this.props.queryModifier.modifyText(this.props.query, this.props.tags)}
+                        value={this.props.modifiedQuery}
                         disabled={true}
                         highlight={code => highlight(code, languages.sql)}
                     />

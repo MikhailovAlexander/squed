@@ -1,4 +1,5 @@
 import setDbList from "../actionCreators/setDbList";
+import setCurrentDb from "../actionCreators/setCurrentDb";
 
 function fetchDbList(url){
     return (dispatch) => {
@@ -11,7 +12,10 @@ function fetchDbList(url){
                 return response;
             })
             .then((response) => response.json())
-            .then((dbList) => dispatch(setDbList(dbList)))
+            .then((dbList) => {
+                dispatch(setDbList(dbList));
+                if (dbList.length > 0) dispatch(setCurrentDb(dbList[0]));
+            })
     };
 }
 

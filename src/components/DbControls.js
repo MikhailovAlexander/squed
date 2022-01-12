@@ -8,7 +8,7 @@ class DbControls extends React.Component {
         this.props.setCurrentDb(String(event.target.value));
     }
     runQuery = () => {
-        this.props.fetchQueryResult(getResultURL, this.props.currentDb, this.props.query);
+        this.props.fetchQueryResult(getResultURL, this.props.currentDb, this.props.modifiedQuery);
     }
     componentDidMount() {
         this.props.fetchDbList(dbListURL);
@@ -26,6 +26,7 @@ class DbControls extends React.Component {
                     id="check_btn"
                     disabled={this.props.resultIsLoading}
                     onClick={this.runQuery}>Выполнить запрос</button>
+                <div hidden={!this.props.resultIsLoading}>Запрос выполняется...</div>
             </div>
         );
     }

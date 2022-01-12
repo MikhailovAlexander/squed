@@ -3,18 +3,15 @@ function mapStateToProps(component) {
         case "Editors": {
             return function (state) {
                 return {
-                    queryModifier: state.queryModifier,
-                    tags: state.tags,
-                    query: state.query
+                    query: state.query,
+                    modifiedQuery: state.queryModifier.modifyText(state.query, state.tags)
                 };
             }
         }
         case "DbControls": {
             return function (state) {
                 return {
-                    queryModifier: state.queryModifier,
-                    tags: state.tags,
-                    query: state.query,
+                    modifiedQuery: state.queryModifier.modifyText(state.query, state.tags),
                     resultIsLoading: state.resultIsLoading,
                     resultHasError: state.resultHasError,
                     dbList: state.dbList,

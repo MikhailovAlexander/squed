@@ -4,9 +4,16 @@ import ResultRedux from "../containers/ResultRedux";
 import EditorsRedux from "../containers/EditorsRedux";
 import DbControlsRedux from "../containers/DbControlsRedux";
 
-const version = "0.21";
+const version = "0.9";
 
 class App extends React.Component {
+    onPageLeave = (event) => {
+        const msg = "Данные страницы будут потеряны. Продолжить?";
+        event.returnValue = msg;
+    }
+    componentDidMount() {
+        window.addEventListener('beforeunload', this.onPageLeave);
+    }
   render() {
     return (
         <div id="app">

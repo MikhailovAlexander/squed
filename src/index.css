@@ -83,9 +83,14 @@ button{
 .currentTag{
   background-color: silver;
 }
+.result_error{
+  color: red;
+  font-size: 15pt;
+}
 .result_tb{
   border-collapse: collapse;
   border:1px solid;
+  border-color: #e6e6e6;
   padding: 5px;
   text-align: center;
 }

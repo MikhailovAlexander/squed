@@ -56,6 +56,8 @@ class TagControls extends React.Component {
             "Количество удалений","в т.ч. строк"];
         const values = this.props.queryModifier.analyseTags(this.props.query);
         this.props.setResult({label: label, header: header, values: values});
+        this.props.setResultHasError(false);
+        this.props.setResultError("");
     }
     saveButtonClick = () => {
         let newTagKey = this.props.tempTagKey;
