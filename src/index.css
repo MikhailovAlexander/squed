@@ -4,9 +4,9 @@ html, body, #root{
 }
 #app{
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 100%;
 }
 #header{
   display: block;
@@ -22,24 +22,22 @@ html, body, #root{
   font-weight: normal;
 }
 #workspace{
+  flex: 1 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: start;
-  height: 100%;
 }
 .editors{
-   display: flex;
-   flex-direction: row;
-   justify-content: start;
-   width: 100%;
-   height: 100%;
- }
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  width: 80%;
+}
 .edit_panel{
   display: flex;
   flex-direction: column;
   justify-content: start;
-  width: 100%;
-  height: 100%;
+  width: 50%;
   font-size: 15pt;
 }
 .edit_panel label{
@@ -51,8 +49,17 @@ html, body, #root{
   text-align: left;
   line-height: 1.5;
 }
+.editor_textarea{
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+.editor_pre{
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
 #controls{
   background-color: #0f2d69;
+  min-width: 20%;
 }
 #db_list_area{
   display: flex;
@@ -76,6 +83,8 @@ button{
   background-color: #ffffff;
   min-height: 30px;
   margin: 5px;
+  overflow-wrap: anywhere;
+  width: 100%;
 }
 #tags_list td{
   padding: 5px;

@@ -16,6 +16,8 @@ class Editors extends React.Component {
                         value={this.props.query}
                         onValueChange={code => this.props.setQuery(code)}
                         highlight={code => highlight(code, languages.sql)}
+                        textareaClassName="editor_textarea"
+                        preClassName="editor_pre"
                     />
                 </div>
                 <div id="trg_query_panel" className="edit_panel">
@@ -25,6 +27,8 @@ class Editors extends React.Component {
                         value={this.props.modifiedQuery}
                         disabled={true}
                         highlight={code => highlight(code, languages.sql)}
+                        textareaClassName="editor_textarea"
+                        preClassName="editor_pre"
                     />
                 </div>
             </div>

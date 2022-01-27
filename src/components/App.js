@@ -4,7 +4,7 @@ import ResultRedux from "../containers/ResultRedux";
 import EditorsRedux from "../containers/EditorsRedux";
 import DbControlsRedux from "../containers/DbControlsRedux";
 
-const version = "0.9";
+const version = "0.9.1";
 
 class App extends React.Component {
     onPageLeave = (event) => {
