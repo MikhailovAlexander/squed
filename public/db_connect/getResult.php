@@ -1,4 +1,5 @@
 <?php
+    require "config.php";
     $rest_json = file_get_contents("php://input");
     $_POST = json_decode($rest_json, true);
     $dbName = "";
@@ -9,8 +10,6 @@
     if(isset($_POST["query"])){
         $query = $_POST["query"];
     }
-
-    $config = file_get_contents('config.json');
     $dbList = json_decode($config, true)["dbList"];
     $dbConf = null;
     $hasErrors = false;
